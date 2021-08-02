@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-public static MenuManager Instance;
+
+	public static MenuManager Instance;
 
 	[SerializeField] Menu[] menus;
 

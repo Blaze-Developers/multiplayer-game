@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class MultiLauncher : MonoBehaviourPunCallbacks
 {
+	[SerializeField] TMP_InputField roomNameInputField;
+	[SerializeField] TMP_Text errorText;
+	
     void Start()
 	{
 		Debug.Log("Connecting to Master");
@@ -14,23 +18,31 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 	{
 		Debug.Log("Connected to Master");
 		PhotonNetwork.JoinLobby();
-		
+		PhotonNetwork.AutomaticallySyncScene = true;
+	}
+	public void CreateRoom()
+	{
+		if (string.IsNullOrEmpty(roomNameInputField.text))
+		{
+			return;
+		}
+		PhotonNetwork.CreateRoom(roomNameInputField.text);
+		MenuManager.Instance.OpenMenu("Loading");
 	}
     public override void OnJoinedLobby()
 	{
-		
+		MenuManager.Instance.OpenMenu("Title");
 		Debug.Log("Joined Lobby");		
 	}
 	public override void OnJoinedRoom()
 	{
-		MenuManager.Instance.OpenMenu("room");
+		MenuManager.Instance.OpenMenu("Room");
 		
-
 	}
 	public override void OnCreateRoomFailed(short returnCode, string message)
 	{
-		
-		MenuManager.Instance.OpenMenu("error");
+		errorText.text = "Room Creation Failed" + message;
+		MenuManager.Instance.OpenMenu("Error Menu");
 	}
 	
     

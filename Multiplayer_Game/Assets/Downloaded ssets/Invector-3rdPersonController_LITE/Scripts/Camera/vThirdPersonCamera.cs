@@ -36,7 +36,7 @@ public class vThirdPersonCamera : MonoBehaviour
     public Transform currentTarget;
     [HideInInspector]
     public Vector2 movementSpeed;
-
+    
     private Transform targetLookAt;
     private Vector3 currentTargetPos;
     private Vector3 lookPoint;
@@ -60,6 +60,8 @@ public class vThirdPersonCamera : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         Init();
     }
 
