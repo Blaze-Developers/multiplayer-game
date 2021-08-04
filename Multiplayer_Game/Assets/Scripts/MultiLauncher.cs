@@ -32,7 +32,7 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 	{
 		Debug.Log("Connected to Master");
 		PhotonNetwork.JoinLobby();
-		PhotonNetwork.AutomaticallySyncScene = true;
+		
 	}
 	public void CreateRoom()
 	{
