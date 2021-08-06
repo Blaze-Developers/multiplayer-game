@@ -43,12 +43,12 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 		PhotonNetwork.CreateRoom(roomNameInputField.text);
 		MenuManager.Instance.OpenMenu("Loading");
 	}
-    public override void OnJoinedLobby()
+	public override void OnJoinedLobby()
 	{
 		
 		MenuManager.Instance.OpenMenu("Title");
 		Debug.Log("Joined Lobby");
-		PhotonNetwork.NickName = "Player " + Random.Range(0, 100).ToString("000");
+		PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
 	}
 	public override void OnJoinedRoom()
 	{
@@ -61,11 +61,14 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 			Instantiate(PlayerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
 		}
 
+		
+
 	}
 	public override void OnCreateRoomFailed(short returnCode, string message)
 	{
-		errorText.text = "Room Creation Failed" + message;
-		MenuManager.Instance.OpenMenu("Error Menu");
+		errorText.text = "Room Creation Failed: " + message;
+		Debug.LogError("Room Creation Failed: " + message);
+		MenuManager.Instance.OpenMenu("Error");
 	}
 	public override void OnRoomListUpdate(List<RoomInfo> roomList)
 	{
@@ -85,8 +88,8 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 	{
 		PhotonNetwork.JoinRoom(info.Name);
 		MenuManager.Instance.OpenMenu("loading");
-		
-		
+		MenuManager.Instance.OpenMenu("loading");
+				
 	}
 
 	public void LeaveRoom()
