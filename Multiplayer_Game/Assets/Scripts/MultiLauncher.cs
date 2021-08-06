@@ -17,6 +17,7 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 	[SerializeField] GameObject roomListItemPrefab;
 	[SerializeField] Transform playerListContent;
 	[SerializeField] GameObject PlayerListItemPrefab;
+	[SerializeField] GameObject startGameButton;
 
 	void Awake()
 	{
@@ -32,7 +33,7 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 	{
 		Debug.Log("Connected to Master");
 		PhotonNetwork.JoinLobby();
-		
+		PhotonNetwork.AutomaticallySyncScene = true;
 	}
 	public void CreateRoom()
 	{
@@ -50,10 +51,19 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 		Debug.Log("Joined Lobby");
 		PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
 	}
+	public void StartGame()
+	{
+		PhotonNetwork.LoadLevel(1);
+	}
 	public override void OnJoinedRoom()
 	{
 		MenuManager.Instance.OpenMenu("Room");
 		roomNameText.text = PhotonNetwork.CurrentRoom.Name;
+
+		foreach (Transform child in playerListContent)
+		{
+			Destroy(child.gameObject);
+		}
 
 		Player[] players = PhotonNetwork.PlayerList;
 		for (int i = 0; i < players.Count(); i++)
@@ -61,8 +71,12 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 			Instantiate(PlayerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
 		}
 
-		
+		startGameButton.SetActive(PhotonNetwork.IsMasterClient);
 
+	}
+	public override void OnMasterClientSwitched(Player newMasterClient)
+	{
+		startGameButton.SetActive(PhotonNetwork.IsMasterClient);
 	}
 	public override void OnCreateRoomFailed(short returnCode, string message)
 	{
