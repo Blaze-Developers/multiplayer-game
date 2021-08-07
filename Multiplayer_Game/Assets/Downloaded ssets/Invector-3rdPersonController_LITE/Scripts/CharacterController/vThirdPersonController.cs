@@ -1,9 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Realtime;
+using UnityEngine.UI;
 
 namespace Invector.vCharacterController
 {
+
+    
+
     public class vThirdPersonController : vThirdPersonAnimator
     {
+
+
+
         public virtual void ControlAnimatorRootMotion()
         {
             if (!this.enabled) return;
