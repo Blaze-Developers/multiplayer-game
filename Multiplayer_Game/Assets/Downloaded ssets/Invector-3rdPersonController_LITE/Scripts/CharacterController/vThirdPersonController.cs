@@ -15,21 +15,14 @@ namespace Invector.vCharacterController
         private void Awake()
         {
             PV = GetComponent<PhotonView>();
+            
         }
         private void Update()
         {
             if (!PV.IsMine)
                 return;
-
         }
-        private void Start()
-        {
-            if(!PV.IsMine)
-            {
-                Destroy(GetComponentInChildren<Camera>().gameObject);
-                Destroy(_rigidbody);
-            }
-        }
+        
 
 
         public virtual void ControlAnimatorRootMotion()

@@ -30,18 +30,29 @@ namespace Invector.vCharacterController
 
         #endregion
 
+        private void Awake()
+        {
+            PV = GetComponent<PhotonView>();
+        }
         protected virtual void Start()
         {
-            
+       
              InitilizeController();
              InitializeTpCamera();           
         }
 
         protected virtual void FixedUpdate()
         {
-            cc.UpdateMotor();               // updates the ThirdPersonMotor methods
-            cc.ControlLocomotionType();     // handle the controller locomotion type and movespeed
-            cc.ControlRotationType();       // handle the controller rotation type
+            if (!PV.IsMine)
+                return;
+            else
+            {
+                cc.UpdateMotor();               
+                cc.ControlLocomotionType();     
+                cc.ControlRotationType();
+            }
+            
+                   
         }
 
         protected virtual void Update()

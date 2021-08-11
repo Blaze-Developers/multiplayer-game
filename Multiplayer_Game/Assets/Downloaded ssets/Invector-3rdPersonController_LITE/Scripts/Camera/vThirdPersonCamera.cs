@@ -1,5 +1,10 @@
-﻿using Invector;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Realtime;
+using Invector;
 
 public class vThirdPersonCamera : MonoBehaviour
 {
@@ -25,7 +30,7 @@ public class vThirdPersonCamera : MonoBehaviour
     #endregion
 
     #region hide properties    
-
+    
     [HideInInspector]
     public int indexList, indexLookPoint;
     [HideInInspector]
@@ -55,9 +60,14 @@ public class vThirdPersonCamera : MonoBehaviour
     private float xMaxLimit = 360f;
     private float cullingHeight = 0.2f;
     private float cullingMinDist = 0.1f;
-
+    public PhotonView PV;
     #endregion
 
+    private void Awake()
+    {
+        
+        PV = GetComponent<PhotonView>();
+    }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -88,9 +98,20 @@ public class vThirdPersonCamera : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target == null || targetLookAt == null) return;
+        if (!PV.IsMine)
+        {
+            
+            return;
+        }
+            
+        else
+        {
+            if (target == null || targetLookAt == null) return;
+            CameraMovement();
+        }
+        
 
-        CameraMovement();
+        
     }
 
     /// <summary>
