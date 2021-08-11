@@ -373,10 +373,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8815259519855851540, guid: 22fae9472992ccd49915148e6bf01d50,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.399
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22fae9472992ccd49915148e6bf01d50, type: 3}
