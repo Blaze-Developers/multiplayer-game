@@ -20,6 +20,7 @@ namespace Invector.vCharacterController
         {
             if (!PV.IsMine)
                 return;
+
         }
         private void Start()
         {
