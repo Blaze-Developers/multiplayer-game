@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
-	
+    //Main Script
 	Rigidbody rb;
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
 
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         if(!PV.IsMine)
         {
 			Destroy(GetComponentInChildren<Camera>().gameObject);
+			Destroy(rb);
 		}
     }
 
