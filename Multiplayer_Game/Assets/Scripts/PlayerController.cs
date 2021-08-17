@@ -5,9 +5,12 @@ using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
-    //Main Script
+	//Main Script
+	public Animator _animator;
 	Rigidbody rb;
+	Vector2 input;
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
+	
 
 	float verticalLookRotation;
 	bool grounded;
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody>();
 		PV = GetComponent<PhotonView>();
+		_animator = GetComponent<Animator>();
 
 		playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
 	}
@@ -75,8 +79,11 @@ public class PlayerController : MonoBehaviour
 	}
 	void Move()
 	{
-		Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-
+		input.x = Input.GetAxisRaw("Horizontal");
+		input.y = Input.GetAxisRaw("Vertical");
+		Vector3 moveDir = new Vector3(input.x, 0, input.y).normalized;
+		_animator.SetFloat("Xinput", input.x);
+		_animator.SetFloat("Yinput", input.y);
 		moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
 	}
 
