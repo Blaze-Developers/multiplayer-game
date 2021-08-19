@@ -5,9 +5,12 @@ using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
-	
+
+	//Animator animator;
 	Rigidbody rb;
-	Vector2 input;
+	Vector2 MoveDir;
+	
+
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
 	
 
@@ -21,18 +24,20 @@ public class PlayerController : MonoBehaviour
 
 	PhotonView PV;
 
-	const float maxHealth = 100f;
-	float currentHealth = maxHealth;
+
+	
 
     private void Start()
     {
-		
-        Cursor.lockState = CursorLockMode.Locked;
+		MoveDir.x = Input.GetAxisRaw("Horizontal");
+		MoveDir.y = Input.GetAxisRaw("Vertical");
+		//animator = GetComponent<Animator>();
+		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
         if(!PV.IsMine)
         {
 			Destroy(GetComponentInChildren<Camera>().gameObject);
-			Destroy(rb);
+			//Destroy(rb);
 		}
     }
 
@@ -70,7 +75,6 @@ public class PlayerController : MonoBehaviour
     void Look()
 	{
 		transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * mouseSensitivity);
-
 		verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
 		verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
@@ -78,11 +82,14 @@ public class PlayerController : MonoBehaviour
 	}
 	void Move()
 	{
-		input.x = Input.GetAxisRaw("Horizontal");
-		input.y = Input.GetAxisRaw("Vertical");
-		Vector3 moveDir = new Vector3(input.x, 0, input.y).normalized;
+		
+		
+		Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 		
 		moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
+
+		//animator.SetFloat("Xinput", MoveDir.x);
+		//animator.SetFloat("Yinput", MoveDir.y);
 	}
 
 	void Jump()

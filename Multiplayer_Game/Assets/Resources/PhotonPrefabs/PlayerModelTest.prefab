@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: -8191681736101127031}
   - component: {fileID: 3750139589418890875}
   m_Layer: 0
-  m_Name: PlayerController 1
+  m_Name: PlayerModelTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ CapsuleCollider:
   m_Radius: 0.2
   m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.89, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &306527849254380578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,8 +1023,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2533593937116962214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.1, z: 0.6}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 6095441543267575171}
   m_RootOrder: 2

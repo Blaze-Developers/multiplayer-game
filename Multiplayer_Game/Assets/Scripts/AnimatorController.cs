@@ -6,18 +6,18 @@ public class AnimatorController : MonoBehaviour
 {
     Animator animator;
     Vector2 input;
-    // Start is called before the first frame update
+    
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        input.x = Input.GetAxis("Horizontal");
-        input.y = Input.GetAxis("Vertical");
-
         animator.SetFloat("Xinput", input.x);
         animator.SetFloat("Yinput", input.y);
     }
