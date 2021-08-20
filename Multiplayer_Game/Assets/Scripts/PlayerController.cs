@@ -6,9 +6,9 @@ using Photon.Pun;
 public class PlayerController : MonoBehaviour
 {
 
-	//Animator animator;
+	
 	Rigidbody rb;
-	Vector2 MoveDir;
+	
 	
 
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
@@ -24,20 +24,19 @@ public class PlayerController : MonoBehaviour
 
 	PhotonView PV;
 
-
+	
 	
 
     private void Start()
     {
-		MoveDir.x = Input.GetAxisRaw("Horizontal");
-		MoveDir.y = Input.GetAxisRaw("Vertical");
-		//animator = GetComponent<Animator>();
+		
+		
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
         if(!PV.IsMine)
         {
 			Destroy(GetComponentInChildren<Camera>().gameObject);
-			//Destroy(rb);
+			Destroy(rb);
 		}
     }
 
@@ -70,6 +69,8 @@ public class PlayerController : MonoBehaviour
 		Look();
 		Move();
 		Jump();
+
+		
 	}
 
     void Look()
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
 		cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
 	}
-	void Move()
+	public void Move()
 	{
 		
 		
@@ -88,8 +89,7 @@ public class PlayerController : MonoBehaviour
 		
 		moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
 
-		//animator.SetFloat("Xinput", MoveDir.x);
-		//animator.SetFloat("Yinput", MoveDir.y);
+		
 	}
 
 	void Jump()

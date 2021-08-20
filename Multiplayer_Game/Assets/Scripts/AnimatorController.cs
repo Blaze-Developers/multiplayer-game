@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class AnimatorController : MonoBehaviour
 {
-    Animator animator;
-    Vector2 input;
-    
+    Animator anim;
+    Vector3 move;
+     
 
-    void Start()
+    private void Awake()
     {
-        animator = GetComponent<Animator>();
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
+        move.x = Input.GetAxis("Horizontal");
+        move.y = Input.GetAxis("Vertical");
+        anim = GetComponent<Animator>();
     }
 
-    
-    void Update()
+    private void FixedUpdate()
     {
-        animator.SetFloat("Xinput", input.x);
-        animator.SetFloat("Yinput", input.y);
+        anim.SetFloat("Xinput", move.x);
+        anim.SetFloat("Yinput", move.y);
     }
+
+
 }
