@@ -53,7 +53,7 @@ public class MultiLauncher : MonoBehaviourPunCallbacks
 	}
 	public void StartGame()
 	{
-		PhotonNetwork.LoadLevel(1);
+		PhotonNetwork.LoadLevel(2);
 	}
 	public override void OnJoinedRoom()
 	{
