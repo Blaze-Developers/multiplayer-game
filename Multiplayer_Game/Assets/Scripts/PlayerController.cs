@@ -4,16 +4,11 @@ using UnityEngine;
 using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
-{
-
-	
+{	
 	Rigidbody rb;
-	
-	
-
+		
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
 	
-
 	float verticalLookRotation;
 	bool grounded;
 	Vector3 smoothMoveVelocity;
@@ -23,14 +18,9 @@ public class PlayerController : MonoBehaviour
 	PlayerManager playerManager;
 
 	PhotonView PV;
-
 	
-	
-
     private void Start()
-    {
-		
-		
+    {		
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
         if(!PV.IsMine)
@@ -68,9 +58,7 @@ public class PlayerController : MonoBehaviour
 
 		Look();
 		Move();
-		Jump();
-
-		
+		Jump();		
 	}
 
     void Look()
@@ -88,8 +76,7 @@ public class PlayerController : MonoBehaviour
 		Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 		
 		moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
-
-		
+	
 	}
 
 	void Jump()
